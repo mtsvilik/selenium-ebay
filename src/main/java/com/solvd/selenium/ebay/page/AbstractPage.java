@@ -10,11 +10,13 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.time.Duration;
+import java.util.Iterator;
+import java.util.Set;
 
 public class AbstractPage {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(AbstractPage.class);
-    private static final Duration TIMEOUT = Duration.ofSeconds(15);
+    private static final Duration TIMEOUT = Duration.ofSeconds(5);
 
     protected WebDriver driver;
 
@@ -55,12 +57,22 @@ public class AbstractPage {
         actions.moveToElement(element).perform();
     }
 
-    public void clickCheckBox(WebElement element) {
-        WebElement checkBoxElement = new WebDriverWait(driver, TIMEOUT)
-                .until(ExpectedConditions.elementToBeClickable(element));
-        boolean isSelected = checkBoxElement.isSelected();
-        if (!isSelected) {
-            checkBoxElement.click();
-        }
+    public void switchToActiveElement() {
+        driver.switchTo().activeElement();
+    }
+
+    public void switchToWindows() {
+        Set<String> windowHandles = driver.getWindowHandles();
+        Iterator<String> iterator = windowHandles.iterator();
+        String parentWindow = iterator.next();
+        String childWindow = iterator.next();
+        driver.switchTo().window(childWindow);
+    }
+
+    public String getText(WebElement element) {
+        new WebDriverWait(driver, TIMEOUT).until(ExpectedConditions.visibilityOf(element));
+        String text = element.getText();
+        LOGGER.info(String.format("The text inside the element: %s", text));
+        return text;
     }
 }

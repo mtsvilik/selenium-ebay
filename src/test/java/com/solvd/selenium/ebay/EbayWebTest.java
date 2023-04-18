@@ -4,11 +4,14 @@ import com.solvd.selenium.ebay.page.*;
 import com.solvd.selenium.ebay.utils.TestDataReader;
 import org.testng.Assert;
 import org.testng.annotations.Test;
+import org.testng.asserts.SoftAssert;
+
+import java.util.List;
 
 public class EbayWebTest extends AbstractTest {
 
     @Test
-    public void verifyShoppingCartIconIsClickable() {
+    public void verifyShoppingCartIconIsClickableTest() {
         HomePage homePage = new HomePage(driver);
         ShoppingCartPage shoppingCartPage = homePage.clickShoppingCartIcon();
         Assert.assertEquals(shoppingCartPage.getEmptyCartText(), TestDataReader.getTestData("text"),
@@ -16,7 +19,7 @@ public class EbayWebTest extends AbstractTest {
     }
 
     @Test
-    public void checkSignInWithValidData() {
+    public void checkSignInWithValidDataTest() {
         HomePage homePage = new HomePage(driver);
         SignInPage signInPage = homePage.clickSignInButton();
         signInPage.enterEmail(TestDataReader.getTestData("email"));
@@ -26,7 +29,7 @@ public class EbayWebTest extends AbstractTest {
     }
 
     @Test
-    public void verifyElectronicsMainContentIsWorking() {
+    public void verifyElectronicsMainContentIsWorkingTest() {
         HomePage homePage = new HomePage(driver);
         CategoryPage categoryPage = homePage.chooseComputerCategory();
         Assert.assertEquals(categoryPage.getPageTitle(), TestDataReader.getTestData("pageTitle"),
@@ -34,7 +37,7 @@ public class EbayWebTest extends AbstractTest {
     }
 
     @Test
-    public void verifyMoreFiltersButtonIsClickable() {
+    public void verifyMoreFiltersButtonIsClickableTest() {
         HomePage homePage = new HomePage(driver);
         SearchResultPage searchResultPage = homePage.openResultPage(TestDataReader.getTestData("searchText"));
         searchResultPage.clickMoreFiltersButton();
@@ -42,23 +45,42 @@ public class EbayWebTest extends AbstractTest {
     }
 
     @Test
-    public void verifyRegistrationWithEmptyRequiredFields() {
+    public void verifyRegistrationWithEmptyRequiredFieldsTest() {
         HomePage homePage = new HomePage(driver);
         SignUpPage signUpPage = homePage.clickRegisterButton();
         Assert.assertFalse(signUpPage.clickCreateAccount(), "Create account button isn't clickable");
     }
 
     @Test
-    public void verifyBusinessAccountRadioButtonIsChecked() {
+    public void verifyBusinessAccountRadioButtonIsCheckedTest() {
         HomePage homePage = new HomePage(driver);
         SignUpPage signUpPage = homePage.clickRegisterButton();
-        Assert.assertTrue(signUpPage.chooseBusinessAccount(), "Business account radio button isn't checked");
+        Assert.assertTrue(signUpPage.chooseBusinessAccount(),
+                "Business account radio button isn't checked");
     }
 
     @Test
-    public void verifyUnregisteredUserCanAddProductToShoppingCart() {
+    public void verifySearchResultsTest() {
         HomePage homePage = new HomePage(driver);
-        SignUpPage signUpPage = homePage.clickRegisterButton();
-        Assert.assertTrue(signUpPage.chooseBusinessAccount(), "Business account radio button isn't checked");
+        SearchResultPage searchResultPage = homePage.openResultPage(TestDataReader.getTestData("searchText"));
+        List<String> titles = searchResultPage.showResults();
+
+        SoftAssert softAssert = new SoftAssert();
+        titles.forEach(title ->
+                softAssert.assertTrue(title.contains(TestDataReader.getTestData("searchText"))));
+        softAssert.assertAll();
+
+        ProductPage productPage = searchResultPage.chooseRandomProduct();
+        productPage.showShippingInfo();
+        softAssert.assertTrue(productPage.getShippingButton(),
+                "Shipping button isn't checked");
+    }
+
+    @Test
+    public void verifyAllCategoriesSelectIsWorkingTest() {
+        HomePage homePage = new HomePage(driver);
+        homePage.checkSelect();
+        Assert.assertEquals(homePage.getSelectTitle(), TestDataReader.getTestData("selectTitle"),
+                "All Categories select isn't worked");
     }
 }

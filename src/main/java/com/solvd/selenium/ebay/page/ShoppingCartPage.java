@@ -16,6 +16,6 @@ public class ShoppingCartPage extends AbstractPage {
     }
 
     public String getEmptyCartText() {
-        return emptyCartText.getText();
+        return getText(emptyCartText);
     }
 }

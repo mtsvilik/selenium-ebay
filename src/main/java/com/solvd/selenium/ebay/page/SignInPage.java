@@ -25,13 +25,13 @@ public class SignInPage extends AbstractPage {
     }
 
     public void enterEmail(String email) {
-        driver.switchTo().activeElement();
+        switchToActiveElement();
         sendKeys(emailField, email);
         clickWebElement(continueButton);
     }
 
     public AccountPage enterPassword(String password) {
-        driver.switchTo().activeElement();
+        switchToActiveElement();
         sendKeys(passwordField, password);
         clickWebElement(signInButton);
         return new AccountPage(driver);

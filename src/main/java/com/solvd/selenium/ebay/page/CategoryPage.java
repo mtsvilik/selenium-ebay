@@ -16,8 +16,6 @@ public class CategoryPage extends AbstractPage {
     }
 
     public String getPageTitle() {
-        return pageTitle.getText();
+        return getText(pageTitle);
     }
-
-
 }

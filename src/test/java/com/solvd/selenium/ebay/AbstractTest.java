@@ -15,7 +15,7 @@ public class AbstractTest {
 
     @BeforeMethod
     public void setUp() {
-        System.setProperty("browser", "path");
+        System.setProperty("webdriver.chrome.driver", "/Users/solvd/Selenium/chromedriver111");
         ChromeOptions options = new ChromeOptions();
         options.addArguments("--remote-allow-origins=*");
         driver = new ChromeDriver(options);

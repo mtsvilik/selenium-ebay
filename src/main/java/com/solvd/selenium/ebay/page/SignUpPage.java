@@ -20,12 +20,12 @@ public class SignUpPage extends AbstractPage {
     }
 
     public boolean clickCreateAccount() {
-        driver.switchTo().activeElement();
+        switchToActiveElement();
         return createAccountButton.isSelected();
     }
 
     public boolean chooseBusinessAccount() {
-        driver.switchTo().activeElement();
+        switchToActiveElement();
         Actions action = new Actions(driver);
         action.moveToElement(businessAccountRadio).perform();
         businessAccountRadio.click();
