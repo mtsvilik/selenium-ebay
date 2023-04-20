@@ -15,17 +15,14 @@ public class HomePage extends AbstractPage {
     @FindBy(xpath = "//*[@id='gh-minicart-hover']")
     private WebElement shoppingCartIcon;
 
+    @FindBy(xpath = "//*[@id='gdpr-banner-accept']")
+    private WebElement acceptAllButton;
+
     @FindBy(xpath = "//*[@id='gh-ug']")
     private WebElement signInButton;
 
     @FindBy(xpath = "//*[@id='gh-ug-flex']/a")
     private WebElement registerButton;
-
-    @FindBy(xpath = "//*[@id='gdpr-banner']")
-    private WebElement cookiesBanner;
-
-    @FindBy(xpath = "//*[@id='gdpr-banner-accept']")
-    private WebElement acceptAllCookiesButton;
 
     @FindBy(xpath = "//*[@id='mainContent']/div[1]/ul/li[4]/a")
     private WebElement electronicsButton;
@@ -44,6 +41,9 @@ public class HomePage extends AbstractPage {
 
     @FindBy(xpath = "//*[@id='gh-cat']/option[34]")
     private WebElement select;
+
+    @FindBy(xpath = "//*[@id='areaTitle']/h1")
+    private WebElement captcha;
 
     public HomePage(WebDriver driver) {
         super(driver);

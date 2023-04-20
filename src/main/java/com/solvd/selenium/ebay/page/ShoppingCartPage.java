@@ -7,7 +7,7 @@ import org.openqa.selenium.support.PageFactory;
 
 public class ShoppingCartPage extends AbstractPage {
 
-    @FindBy(xpath = "//*[@id='mainContent']/div/div[2]/div/div/div[1]/span/span/span")
+    @FindBy(xpath = "//*[@id='mainContent']/div/div[2]/div/div/div/div[1]/span/span/span")
     private WebElement emptyCartText;
 
     public ShoppingCartPage(WebDriver driver) {

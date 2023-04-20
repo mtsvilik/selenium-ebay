@@ -7,15 +7,15 @@ import org.openqa.selenium.support.PageFactory;
 
 public class AccountPage extends AbstractPage {
 
-    @FindBy(xpath = "//*[@id='continue-btn']")
-    private WebElement continueButton;
+    @FindBy(xpath = "//*[@id='gh-ug']")
+    private WebElement userNameButton;
 
     public AccountPage(WebDriver driver) {
         super(driver);
         PageFactory.initElements(driver, this);
     }
 
-    public boolean getContinueButton() {
-        return continueButton.isDisplayed();
+    public String getUserName() {
+        return getText(userNameButton);
     }
 }

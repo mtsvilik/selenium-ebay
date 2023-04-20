@@ -61,12 +61,16 @@ public class AbstractPage {
         driver.switchTo().activeElement();
     }
 
-    public void switchToWindows() {
+    public void switchToWindow() {
+        String parentWindow = driver.getWindowHandle();
         Set<String> windowHandles = driver.getWindowHandles();
         Iterator<String> iterator = windowHandles.iterator();
-        String parentWindow = iterator.next();
-        String childWindow = iterator.next();
-        driver.switchTo().window(childWindow);
+        while (iterator.hasNext()) {
+            String childWindow = iterator.next();
+            if (!parentWindow.equalsIgnoreCase(childWindow)) {
+                driver.switchTo().window(childWindow);
+            }
+        }
     }
 
     public String getText(WebElement element) {

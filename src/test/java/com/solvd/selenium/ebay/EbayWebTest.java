@@ -24,7 +24,7 @@ public class EbayWebTest extends AbstractTest {
         SignInPage signInPage = homePage.clickSignInButton();
         signInPage.enterEmail(TestDataReader.getTestData("email"));
         AccountPage accountPage = signInPage.enterPassword(TestDataReader.getTestData("password"));
-        Assert.assertTrue(accountPage.getContinueButton(),
+        Assert.assertEquals(accountPage.getUserName(), TestDataReader.getTestData("userName"),
                 "Account page should contains sign in text");
     }
 
