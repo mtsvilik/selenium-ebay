@@ -42,9 +42,6 @@ public class HomePage extends AbstractPage {
     @FindBy(xpath = "//*[@id='gh-cat']/option[34]")
     private WebElement select;
 
-    @FindBy(xpath = "//*[@id='areaTitle']/h1")
-    private WebElement captcha;
-
     public HomePage(WebDriver driver) {
         super(driver);
         PageFactory.initElements(driver, this);
