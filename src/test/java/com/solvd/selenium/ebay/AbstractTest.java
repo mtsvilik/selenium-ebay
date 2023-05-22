@@ -2,8 +2,6 @@ package com.solvd.selenium.ebay;
 
 import com.solvd.selenium.ebay.utils.PropertyReader;
 
-import com.solvd.selenium.ebay.utils.TestDataReader;
-import org.openqa.selenium.Cookie;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
@@ -25,16 +23,6 @@ public class AbstractTest {
         driver.manage().window().maximize();
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
         driver.get(PropertyReader.getProperty("url"));
-        addCookie();
-    }
-
-    private void addCookie() {
-        driver.manage().addCookie(new Cookie(TestDataReader.getTestData("cookieName"),
-                TestDataReader.getTestData("cookieValue")));
-        driver.manage().addCookie(new Cookie(TestDataReader.getTestData("cookieName"),
-                TestDataReader.getTestData("cookieValueForCart")));
-        driver.manage().addCookie(new Cookie(TestDataReader.getTestData("cookieNameForBusiness"),
-                TestDataReader.getTestData("cookieValueForBusiness")));
     }
 
     @AfterMethod

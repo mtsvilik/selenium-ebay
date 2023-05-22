@@ -14,6 +14,7 @@ public class EbayWebTest extends AbstractTest {
     public void verifyShoppingCartIconIsClickableTest() {
         HomePage homePage = new HomePage(driver);
         ShoppingCartPage shoppingCartPage = homePage.clickShoppingCartIcon();
+
         Assert.assertEquals(shoppingCartPage.getEmptyCartText(), TestDataReader.getTestData("text"),
                 "Shopping cart page should contains cart is empty text");
     }

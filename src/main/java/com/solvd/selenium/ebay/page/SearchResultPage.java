@@ -10,7 +10,7 @@ import java.util.stream.Collectors;
 
 public class SearchResultPage extends AbstractPage {
 
-    @FindBy(xpath = "//*[@id='s0-51-16-0-1-2-6']/li[2]/span/button")
+    @FindBy(xpath = "//*[@id='s0-53-16-0-1-2-6']/li[2]/span/button")
     private WebElement moreFiltersButton;
 
     @FindBy(xpath = "//*[@id='refineOverlay']/div[2]")
