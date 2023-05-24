@@ -1,7 +1,7 @@
 name: Ebay WEB Tests
 on:
   push:
-    branches: [ "kucoin" ]
+    branches: [ "main" ]
 jobs:
   build:  
     runs-on: ubuntu-latest
