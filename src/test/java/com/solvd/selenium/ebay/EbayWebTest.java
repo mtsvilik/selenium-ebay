@@ -30,10 +30,12 @@ public class EbayWebTest extends AbstractTest {
                 "Account page should contains sign in text");
     }
 
+
     @Test
     public void verifyElectronicsMainContentIsWorkingTest() {
         HomePage homePage = new HomePage(driver);
         CategoryPage categoryPage = homePage.chooseComputerCategory();
+
         Assert.assertEquals(categoryPage.getPageTitle(), TestDataReader.getTestData("pageTitle"),
                 "Category page should contains page title text");
     }
@@ -43,6 +45,7 @@ public class EbayWebTest extends AbstractTest {
         HomePage homePage = new HomePage(driver);
         SearchResultPage searchResultPage = homePage.openResultPage(TestDataReader.getTestData("searchText"));
         searchResultPage.clickMoreFiltersButton();
+
         Assert.assertTrue(searchResultPage.getFilterElement(), "Filter element isn't present");
     }
 
@@ -50,6 +53,7 @@ public class EbayWebTest extends AbstractTest {
     public void verifyRegistrationWithEmptyRequiredFieldsTest() {
         HomePage homePage = new HomePage(driver);
         SignUpPage signUpPage = homePage.clickRegisterButton();
+
         Assert.assertFalse(signUpPage.clickCreateAccount(), "Create account button isn't clickable");
     }
 
@@ -57,6 +61,7 @@ public class EbayWebTest extends AbstractTest {
     public void verifyBusinessAccountRadioButtonIsCheckedTest() {
         HomePage homePage = new HomePage(driver);
         SignUpPage signUpPage = homePage.clickRegisterButton();
+
         Assert.assertTrue(signUpPage.chooseBusinessAccount(),
                 "Business account radio button isn't checked");
     }
@@ -82,6 +87,7 @@ public class EbayWebTest extends AbstractTest {
     public void verifyAllCategoriesSelectIsWorkingTest() {
         HomePage homePage = new HomePage(driver);
         homePage.checkSelect();
+
         Assert.assertEquals(homePage.getSelectTitle(), TestDataReader.getTestData("selectTitle"),
                 "All Categories select isn't worked");
     }
