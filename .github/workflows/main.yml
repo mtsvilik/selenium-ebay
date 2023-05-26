@@ -17,8 +17,10 @@ jobs:
     
     services:
       selenium:
-        image: selenium/standalone-${{ github.event.inputs.browser }}
+        image: selenium/standalone-chrome
         options: --shm-size=2gb
+        ports:
+          - 4444:4444
 
     steps:
       - name: Checkout code
