@@ -22,7 +22,9 @@ jobs:
       - name: Set up JDK
         uses: actions/setup-java@v3
         with:
+          distribution: 'temurin'
           java-version: '11'
+          
       - name: Step 3 - Build with Maven
         run: mvn -B package --file pom.xml
       
