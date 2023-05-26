@@ -9,8 +9,6 @@ on:
         required: true
         options:
           - chrome
-          - firefox
-          - edge
 
 jobs:
   test:
