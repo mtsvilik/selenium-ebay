@@ -16,7 +16,7 @@ import java.util.Set;
 public class AbstractPage {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(AbstractPage.class);
-    private static final Duration TIMEOUT = Duration.ofSeconds(5);
+    private static final Duration TIMEOUT = Duration.ofSeconds(15);
 
     protected WebDriver driver;
 
