@@ -29,11 +29,5 @@ jobs:
           browsers: chrome
           last-versions: 1
 
-      - name: Restore Maven cache
-        uses: skjolber/maven-cache-github-action@v1
-        continue-on-error: true
-        with:
-          step: restore
-
       - name: run the web test
         run: mvn -B package --file pom.xml
