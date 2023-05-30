@@ -1,7 +1,6 @@
 package com.solvd.selenium.ebay;
 
 import com.solvd.selenium.ebay.page.*;
-import com.solvd.selenium.ebay.utils.PropertyReader;
 import com.solvd.selenium.ebay.utils.TestDataReader;
 import org.testng.Assert;
 import org.testng.annotations.Test;
@@ -12,11 +11,11 @@ import java.util.List;
 public class EbayWebTest extends AbstractTest {
 
     @Test
-    public void verifyHomePageIsOpenTest() {
+    public void verifyMoreFiltersButtonIsClickableTest() {
         HomePage homePage = new HomePage(getDriver());
-
-        Assert.assertEquals("https://www.ebay.com/", PropertyReader.getProperty("url"),
-                "Home page should contains url");
+        SearchResultPage searchResultPage = homePage.openResultPage(TestDataReader.getTestData("searchText"));
+        searchResultPage.clickMoreFiltersButton();
+        Assert.assertTrue(searchResultPage.getFilterElement(), "Filter element isn't present");
     }
 
     @Test
@@ -40,5 +39,13 @@ public class EbayWebTest extends AbstractTest {
         productPage.showShippingInfo();
         softAssert.assertTrue(productPage.getShippingButton(),
                 "Shipping button isn't checked");
+    }
+
+    @Test
+    public void verifyElectronicsMainContentIsWorkingTest() {
+        HomePage homePage = new HomePage(getDriver());
+        CategoryPage categoryPage = homePage.chooseComputerCategory();
+        Assert.assertEquals(categoryPage.getPageTitle(), TestDataReader.getTestData("pageTitle"),
+                "Category page should contains page title text");
     }
 }
