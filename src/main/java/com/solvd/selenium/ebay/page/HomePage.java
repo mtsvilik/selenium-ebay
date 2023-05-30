@@ -1,5 +1,6 @@
 package com.solvd.selenium.ebay.page;
 
+import com.solvd.selenium.ebay.utils.PropertyReader;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -47,6 +48,7 @@ public class HomePage extends AbstractPage {
 
     public HomePage(WebDriver driver) {
         super(driver);
+        driver.get(PropertyReader.getProperty("url"));
         PageFactory.initElements(driver, this);
     }
 

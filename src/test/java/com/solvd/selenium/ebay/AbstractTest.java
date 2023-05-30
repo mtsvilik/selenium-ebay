@@ -1,32 +1,33 @@
 package com.solvd.selenium.ebay;
 
-import com.solvd.selenium.ebay.utils.PropertyReader;
-
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.chrome.ChromeOptions;
+import org.openqa.selenium.remote.DesiredCapabilities;
+import org.openqa.selenium.remote.RemoteWebDriver;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 
-import java.time.Duration;
+import java.net.MalformedURLException;
+import java.net.URL;
 
 public class AbstractTest {
 
-    protected WebDriver driver;
+    protected static final ThreadLocal<RemoteWebDriver> remoteDriver = new ThreadLocal<>();
 
     @BeforeMethod
-    public void setUp() {
-        System.setProperty("webdriver.chrome.driver", PropertyReader.getProperty("path"));
-        ChromeOptions options = new ChromeOptions();
-        options.addArguments("--remote-allow-origins=*");
-        driver = new ChromeDriver(options);
-        driver.manage().window().maximize();
-        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
-        driver.get(PropertyReader.getProperty("url"));
+    public void setUp() throws MalformedURLException {
+        DesiredCapabilities capabilities = new DesiredCapabilities();
+        capabilities.setCapability("browserName", "chrome");
+        capabilities.setCapability("enableVNC", true);
+        capabilities.setCapability("enableVideo", false);
+        remoteDriver.set(new RemoteWebDriver(new URL("http://localhost:4444/wd/hub"), capabilities));
+    }
+
+    public WebDriver getDriver() {
+        return remoteDriver.get();
     }
 
     @AfterMethod
     public void tearDown() {
-        driver.close();
+        getDriver().quit();
     }
 }

@@ -12,7 +12,7 @@ public class EbayWebTest extends AbstractTest {
 
     @Test
     public void verifyShoppingCartIconIsClickableTest() {
-        HomePage homePage = new HomePage(driver);
+        HomePage homePage = new HomePage(getDriver());
         ShoppingCartPage shoppingCartPage = homePage.clickShoppingCartIcon();
 
         Assert.assertEquals(shoppingCartPage.getEmptyCartText(), TestDataReader.getTestData("text"),
@@ -21,7 +21,7 @@ public class EbayWebTest extends AbstractTest {
 
     @Test
     public void checkSignInWithValidDataTest() {
-        HomePage homePage = new HomePage(driver);
+        HomePage homePage = new HomePage(getDriver());
         SignInPage signInPage = homePage.clickSignInButton();
         signInPage.enterEmail(TestDataReader.getTestData("email"));
         AccountPage accountPage = signInPage.enterPassword(TestDataReader.getTestData("password"));
@@ -33,7 +33,7 @@ public class EbayWebTest extends AbstractTest {
 
     @Test
     public void verifyElectronicsMainContentIsWorkingTest() {
-        HomePage homePage = new HomePage(driver);
+        HomePage homePage = new HomePage(getDriver());
         CategoryPage categoryPage = homePage.chooseComputerCategory();
 
         Assert.assertEquals(categoryPage.getPageTitle(), TestDataReader.getTestData("pageTitle"),
@@ -42,7 +42,7 @@ public class EbayWebTest extends AbstractTest {
 
     @Test
     public void verifyMoreFiltersButtonIsClickableTest() {
-        HomePage homePage = new HomePage(driver);
+        HomePage homePage = new HomePage(getDriver());
         SearchResultPage searchResultPage = homePage.openResultPage(TestDataReader.getTestData("searchText"));
         searchResultPage.clickMoreFiltersButton();
 
@@ -51,7 +51,7 @@ public class EbayWebTest extends AbstractTest {
 
     @Test
     public void verifyRegistrationWithEmptyRequiredFieldsTest() {
-        HomePage homePage = new HomePage(driver);
+        HomePage homePage = new HomePage(getDriver());
         SignUpPage signUpPage = homePage.clickRegisterButton();
 
         Assert.assertFalse(signUpPage.clickCreateAccount(), "Create account button isn't clickable");
@@ -59,7 +59,7 @@ public class EbayWebTest extends AbstractTest {
 
     @Test
     public void verifyBusinessAccountRadioButtonIsCheckedTest() {
-        HomePage homePage = new HomePage(driver);
+        HomePage homePage = new HomePage(getDriver());
         SignUpPage signUpPage = homePage.clickRegisterButton();
 
         Assert.assertTrue(signUpPage.chooseBusinessAccount(),
@@ -68,7 +68,7 @@ public class EbayWebTest extends AbstractTest {
 
     @Test
     public void verifySearchResultsTest() {
-        HomePage homePage = new HomePage(driver);
+        HomePage homePage = new HomePage(getDriver());
         SearchResultPage searchResultPage = homePage.openResultPage(TestDataReader.getTestData("searchText"));
         List<String> titles = searchResultPage.showResults();
 
@@ -85,7 +85,7 @@ public class EbayWebTest extends AbstractTest {
 
     @Test
     public void verifyAllCategoriesSelectIsWorkingTest() {
-        HomePage homePage = new HomePage(driver);
+        HomePage homePage = new HomePage(getDriver());
         homePage.checkSelect();
 
         Assert.assertEquals(homePage.getSelectTitle(), TestDataReader.getTestData("selectTitle"),
